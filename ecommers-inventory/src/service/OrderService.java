@@ -4,7 +4,6 @@ import entity.Order;
 import payment.UPIPaymentStrategy;
 import payment.PaymentStrategy;
 import repository.InMemoryRepository;
-
 import java.util.List;
 public class OrderService {
     private PaymentStrategy paymentStrategy;
@@ -28,6 +27,8 @@ public class OrderService {
                     productService.updateProductInventory(id, orderedQuantity.get(Integer.valueOf(id)));
                 }
             }
+            // remove order
+            InMemoryRepository.orderMap.remove(orderld);
         }
     }
 }
