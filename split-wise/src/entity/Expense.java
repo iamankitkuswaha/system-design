@@ -2,6 +2,7 @@ package entity;
 
 import expansesplitstrategy.Split;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,14 +12,14 @@ public class Expense {
     private final double expenseAmount;
     private final User paidBy;
     private ExpenseSplitType splitType;
-    private final List<Split> splits;
-    public Expense(String id, String description, double expenseAmount, User paidBy, List<Split> splits, ExpenseSplitType splitType) {
+    private  List<Split> splits;
+    public Expense(String id, String description, double expenseAmount, User paidBy) {
         this.id = id;
         this.description = description;
         this.expenseAmount = expenseAmount;
         this.paidBy = paidBy;
-        this.splits = splits;
-        this.splitType = splitType;
+//        this.splits = splits;
+//        this.splitType = splitType;
     }
 
     public String getId() {
@@ -43,6 +44,10 @@ public class Expense {
 
     public List<Split> getSplits() {
         return splits;
+    }
+
+    public void setSplits(ArrayList<Split> splits){
+        this.splits = new ArrayList<>(splits);
     }
 
     public ExpenseSplitType getSplitType() {
