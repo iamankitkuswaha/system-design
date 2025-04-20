@@ -12,10 +12,15 @@ import java.util.List;
 
 public class SpliteWiseService {
     private static SpliteWiseService spliteWiseService;
+    InMemoryRepository inMemoryRepository;
     private GroupService groupService;
     private UserService userService;
     private ExpenseService expenseService;
     private SpliteWiseService(){
+        groupService = new GroupService();
+        userService = new UserService();
+        expenseService = new ExpenseService();
+        inMemoryRepository = new InMemoryRepository();
     }
     public static synchronized SpliteWiseService getInstance(){
         if(spliteWiseService == null)
@@ -23,15 +28,27 @@ public class SpliteWiseService {
         return spliteWiseService;
     }
 
+    public void addUser(User user){
+        userService.addUser(user);
+    }
+
+    public void addGroup(Group group){
+        groupService.addGroup(group);
+    }
+
+    public void addMemberToGroup(String groupId, User user){
+        groupService.addMemberToGroup(groupId, user);
+    }
     public void addExpense(String groupId, Expense expense){
         Group group = InMemoryRepository.groupMap.get(groupId);
         if(group!=null){
             groupService.addExpenseToGroup(groupId, expense);
-            spliteExpense(expense);
+            splitExpense(expense);
+            updateBalance(expense);
         }
     }
 
-    private void spliteExpense(Expense expense){
+    private void splitExpense(Expense expense){
         double totalExpense  = expense.getExpenseAmount();
         List<Split> splits =  expense.getSplits();
         int splitSize = splits.size();
@@ -48,8 +65,8 @@ public class SpliteWiseService {
 
     private void updateBalance(Expense expense){
         List<Split> splits = expense.getSplits();
+        User paidByUser = expense.getPaidBy();
         for(Split split : splits){
-            User paidByUser = expense.getPaidBy();
             User user = split.getUser();
             double splitAmount = split.getAmount();
             if(!paidByUser.equals(user)){
@@ -70,7 +87,7 @@ public class SpliteWiseService {
         return user1.getId()+"_"+user2.getId();
     }
 
-    public void settleAmount(String userId1, User userId2){
+    public void settleAmount(String userId1, String userId2){
         User user1 = InMemoryRepository.userMap.get(userId1);
         User user2 = InMemoryRepository.userMap.get(userId2);
         if(user1 != null && user2 != null){

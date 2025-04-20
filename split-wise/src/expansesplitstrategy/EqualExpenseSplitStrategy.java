@@ -3,14 +3,17 @@ package expansesplitstrategy;
 import entity.User;
 
 public class EqualExpenseSplitStrategy extends Split {
-    private double amount;
-    public EqualExpenseSplitStrategy(User user, double amount) {
+    public EqualExpenseSplitStrategy(User user) {
         super(user);
-        this.amount = amount;
     }
 
     @Override
     public double getAmount() {
         return amount;
     }
+
+    public void setAmaount(double amount){
+        this.amount = amount;
+    }
+
 }
