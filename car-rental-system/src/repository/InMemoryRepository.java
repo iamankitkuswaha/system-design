@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class InMemoryRepository {
-    private InMemoryRepository inMemoryRepository = null;
+    private static InMemoryRepository inMemoryRepository = null;
     private Map<String, Customer>customerMap;
     private Map<String, Car> carMap;
     private Map<String, Reservation>reservationMap;
@@ -19,7 +19,7 @@ public class InMemoryRepository {
         reservationMap = new ConcurrentHashMap<>();
     }
 
-    public synchronized InMemoryRepository getInstance(){
+    public static synchronized InMemoryRepository getInstance(){
         if(inMemoryRepository == null)
             inMemoryRepository = new InMemoryRepository();
         return inMemoryRepository;

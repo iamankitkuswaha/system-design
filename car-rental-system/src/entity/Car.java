@@ -42,4 +42,15 @@ public class Car {
     public void setRentalPricePerHour(double rentalPricePerHour) {
         this.rentalPricePerHour = rentalPricePerHour;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "plateNumber='" + plateNumber + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", model='" + model + '\'' +
+                ", carStatus=" + carStatus +
+                ", rentalPricePerHour=" + rentalPricePerHour +
+                '}';
+    }
 }

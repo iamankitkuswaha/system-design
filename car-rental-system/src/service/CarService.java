@@ -9,7 +9,7 @@ import java.util.Map;
 public class CarService {
 
     private Map<String, Car>carMap;
-    public void CarService(InMemoryRepository inMemoryRepository){
+    public CarService(InMemoryRepository inMemoryRepository){
         carMap = inMemoryRepository.getCarMap();
     }
     public void addCar(Car car){

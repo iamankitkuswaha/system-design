@@ -43,6 +43,7 @@ public class SplitWiseApplication {
         EqualExpenseSplitStrategy equalSplit2 = new EqualExpenseSplitStrategy(user2);
         PercentageExpenseSplitStrategy perSplit1 = new PercentageExpenseSplitStrategy(user3, 20.0);
         PercentageExpenseSplitStrategy perSplit2 = new PercentageExpenseSplitStrategy(user4, 80.0);
+
         // add splits to expense
         expense1.setSplits(new ArrayList<>(List.of(equalSplit1,equalSplit2)));
         expense2.setSplits(new ArrayList<>(List.of(perSplit1,perSplit2)));
